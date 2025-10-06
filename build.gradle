@@ -1,61 +1,51 @@
+
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+
 plugins {
-  id 'org.jetbrains.intellij' version '1.17.4'
-  id 'org.jetbrains.kotlin.jvm' version '2.2.20'
-  id 'java'
+    id "org.jetbrains.intellij.platform" version "2.9.0"
+    id "org.jetbrains.kotlin.jvm" version "2.1.20"
 }
 
 group 'org.jetbrains'
 version '1.0-SNAPSHOT'
 
 repositories {
-  mavenCentral()
+    mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 dependencies {
+    intellijPlatform {
+        intellijIdeaCommunity("2025.2.1")
 
-}
+        bundledPlugin("com.intellij.java")
 
-def properties = new Properties()
-def file = rootProject.file('local.properties')
+    }
 
-if (file.exists()) {
-  properties.load(file.newDataInputStream())
-}
-
-def ideaPath = properties.getProperty('idea.path')
-
-intellij {
-  type = 'IU'
-
-  if (ideaPath == null) {
-    version = 'LATEST-EAP-SNAPSHOT'
-  } else {
-    localPath = ideaPath
-  }
-
-  plugins = ['java']
-}
-
-patchPluginXml {
-}
-
-test {
-  useJUnitPlatform()
+    testImplementation("junit:junit:4.13.2")
 }
 
 sourceSets {
-  main {
-    java.srcDirs = ['src', 'gen']
-    resources.srcDirs = ['resources']
-  }
-  test {
-    java.srcDirs = ['tests/src']
-    resources.srcDirs = []
-  }
+    main {
+        java.srcDirs = ['src', 'gen']
+        resources.srcDirs = ['resources']
+    }
+    test {
+        java.srcDirs = ['tests/src']
+        resources.srcDirs = []
+    }
+}
+
+tasks {
+    buildSearchableOptions {
+        enabled = false
+    }
 }
 
 kotlin {
-  jvmToolchain {
-    languageVersion.set(JavaLanguageVersion.of('21'))
-  }
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of('21'))
+    }
 }
