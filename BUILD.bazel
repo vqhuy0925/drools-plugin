@@ -1,0 +1,81 @@
+### auto-generated section `build intellij.jboss.drools` start
+load("@rules_jvm//:jvm.bzl", "jvm_library", "resourcegroup")
+
+resourcegroup(
+  name = "drools_resources",
+  srcs = glob(["resources/**/*"]),
+  strip_prefix = "resources"
+)
+
+jvm_library(
+  name = "drools",
+  module_name = "intellij.jboss.drools",
+  visibility = ["//visibility:public"],
+  srcs = glob(["src/**/*.kt", "src/**/*.java", "src/**/*.form", "gen/**/*.kt", "gen/**/*.java"], allow_empty = True),
+  resources = [":drools_resources"],
+  deps = [
+    "@community//platform/analysis-api:analysis",
+    "@community//platform/core-api:core",
+    "@community//platform/editor-ui-api:editor-ui",
+    "@community//platform/platform-api:ide",
+    "@community//platform/ide-core-impl",
+    "@community//platform/core-impl",
+    "@community//platform/platform-impl:ide-impl",
+    "@community//platform/editor-ui-ex:editor-ex",
+    "@community//platform/indexing-api:indexing",
+    "@community//platform/lang-api:lang",
+    "@community//platform/projectModel-api:projectModel",
+    "@community//platform/refactoring",
+    "@community//java/java-psi-api:psi",
+    "@community//java/java-psi-impl:psi-impl",
+    "@community//java/java-impl:impl",
+    "@community//java/java-indexing-api:indexing",
+    "@community//java/idea-ui:ui",
+    "@community//platform/core-ui",
+    "@community//java/java-impl-refactorings:impl-refactorings",
+    "@lib//:fastutil-min",
+  ]
+)
+
+jvm_library(
+  name = "drools_test_lib",
+  visibility = ["//visibility:public"],
+  srcs = glob(["tests/src/**/*.kt", "tests/src/**/*.java", "tests/src/**/*.form"], allow_empty = True),
+  associates = [":drools"],
+  deps = [
+    "@community//platform/analysis-api:analysis",
+    "@community//platform/core-api:core",
+    "@community//platform/editor-ui-api:editor-ui",
+    "@community//platform/platform-api:ide",
+    "@community//platform/ide-core-impl",
+    "@community//platform/core-impl",
+    "@community//platform/platform-impl:ide-impl",
+    "@community//platform/editor-ui-ex:editor-ex",
+    "@community//platform/indexing-api:indexing",
+    "@community//jps/model-api:model",
+    "@community//platform/lang-api:lang",
+    "@community//platform/projectModel-api:projectModel",
+    "@community//platform/refactoring",
+    "@community//platform/testFramework",
+    "@community//platform/testFramework:testFramework_test_lib",
+    "@community//java/java-psi-api:psi",
+    "@community//java/java-psi-impl:psi-impl",
+    "@community//java/java-impl:impl",
+    "@community//java/java-indexing-api:indexing",
+    "@community//java/idea-ui:ui",
+    "@community//java/testFramework",
+    "@community//platform/core-ui",
+    "@community//java/java-impl-refactorings:impl-refactorings",
+    "@lib//:fastutil-min",
+  ]
+)
+### auto-generated section `build intellij.jboss.drools` end
+
+### auto-generated section `test intellij.jboss.drools` start
+load("@community//build:tests-options.bzl", "jps_test")
+
+jps_test(
+  name = "drools_test",
+  runtime_deps = [":drools_test_lib"]
+)
+### auto-generated section `test intellij.jboss.drools` end
