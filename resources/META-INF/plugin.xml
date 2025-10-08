@@ -11,7 +11,8 @@
 
   <dependencies>
     <plugin id="com.intellij.java"/>
-    <plugin id="com.intellij.modules.ultimate"/>
+    <plugin id="com.intellij.modules.platform"/>
+    <plugin id="com.intellij.modules.lang"/>
   </dependencies>
 
   <actions>
