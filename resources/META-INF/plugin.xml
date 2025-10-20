@@ -61,6 +61,8 @@
     <editorHighlighterProvider filetype="Drools" implementationClass="com.intellij.plugins.drools.DroolsEditorHighlighterProvider"/>
 
     <dependencySupport coordinate="org.drools:drools-core" kind="java" displayName="Drools"/>
+    <completion.contributor language="any"
+              implementationClass="com.intellij.plugins.drools.completion.DroolsOOPathCompletionContributor"/>
   </extensions>
 
 </idea-plugin>
